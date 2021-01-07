@@ -1,0 +1,86 @@
+{
+  "name": "job-portal",
+  "version": "1.0.0",
+  "description": "react based front end application to display current available jobs using github jobs api",
+  "main": "index.js",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack serve --mode development --config webpack.dev.js",
+    "build": "./node_modules/.bin/webpack --mode production --config webpack.prod.js",
+    "clean": "rm -rf dist/ node_modules/ package-lock.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "predeploy": "npm run build",
+    "deploy:pages": "gh-pages -d dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnaneswar0907/job-portal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gnaneswar0907/job-portal/issues"
+  },
+  "homepage": "https://github.com/gnaneswar0907/job-portal#readme",
+  "dependencies": {
+    "@fluentui/react": "^7.155.3",
+    "@uifabric/icons": "^7.5.17",
+    "axios": "^0.21.1",
+    "ramda": "^0.27.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/preset-react": "^7.12.10",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-jsx-control-statements": "^4.1.0",
+    "babel-plugin-module-resolver": "^4.1.0",
+    "css-loader": "^5.0.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-to-json": "^3.6.1",
+    "gh-pages": "^3.1.0",
+    "html-webpack-plugin": "^4.5.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1",
+    "webpack-dev-server": "^3.11.1"
+  },
+  "jest": {
+    "browser": false,
+    "verbose": false,
+    "collectCoverage": true,
+    "coverageReporters": [
+      "lcov"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 0,
+        "functions": 0,
+        "lines": 0,
+        "statements": 0
+      }
+    },
+    "moduleNameMapper": {
+      "^.+\\.css$": "identity-obj-proxy"
+    },
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "setupFilesAfterEnv": [
+      "./jestSetup.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "testRegex": "^.+/_tests/.*\\.test.js$"
+  },
+  "keywords": [
+    "react-component",
+    "job-portal"
+  ]
+}

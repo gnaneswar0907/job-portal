@@ -1,0 +1,10 @@
+:root {
+  --purple: #5865e0;
+  --lightGray: #f5f6f8;
+  --white: #ffffff;
+  --darkBlue: #131822;
+  --lightBlue: #19212d;
+}
+body {
+  margin: 0;
+}
