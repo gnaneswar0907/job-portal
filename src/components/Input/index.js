@@ -1,11 +1,14 @@
 import React from "react"
 import { TextField, Icon } from "@fluentui/react"
 
+const NO_OP = () => {}
+
 export const Input = ({
   value = "",
   prefixIconName = "",
-  onPrefixIconClick = () => {},
+  onPrefixIconClick = NO_OP,
   placeholder,
+  onChange = NO_OP,
 }) => (
   <TextField
     borderless
@@ -16,5 +19,6 @@ export const Input = ({
       </span>
     )}
     placeholder={placeholder}
+    onChange={onChange}
   />
 )

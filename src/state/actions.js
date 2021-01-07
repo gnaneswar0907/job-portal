@@ -1,21 +1,28 @@
 /** local imports */
-import api from "api"
-import { FETCH_JOBS, FETCH_JOB_DETAILS } from "./constants"
+import api from "../api"
+import { FETCH_JOBS, FETCH_JOB_DETAILS, LOAD_MORE_SUCCESS } from "./constants"
 
+/** API ACTIONS */
+
+/** GET ALL JOBS BASED ON OPTIONS SELECTED */
 export const fetchAllJobs = (params) => (dispatch) => {
   dispatch({ type: FETCH_JOBS.REQUEST })
   api
     .get(
-      `/positions.json?page=${params.page}&description=${params.description}&full_time=${params.fullTime}&location=${params.location}&lat=${params.geo.latitude}&long=${params.geo.longitude}`
+      `/positions.json?page=${params.page}&description=${params.description}&full_time=${params.fullTime}&location=${params.location}`
     )
     .then((response) => {
-      dispatch({ type: FETCH_JOBS.SUCCESS, payload: response.data })
+      dispatch({
+        type: params.loadMore ? LOAD_MORE_SUCCESS : FETCH_JOBS.SUCCESS,
+        payload: response.data,
+      })
     })
     .catch((err) => {
       dispatch({ type: FETCH_JOBS.FAILURE, payload: err })
     })
 }
 
+/** GET SEPCIFIC JOB DETAILS */
 export const fetchJobDetails = (id) => (dispatch) => {
   dispatch({ type: FETCH_JOB_DETAILS.REQUEST })
   api

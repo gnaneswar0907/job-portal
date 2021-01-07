@@ -37,6 +37,6 @@
 }
 
 .darkModeToggle .toggleIcon {
-  margin-top: 3px;
   color: var(--white);
+  cursor: pointer;
 }

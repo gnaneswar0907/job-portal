@@ -1,4 +1,6 @@
-.modifiedButton {
+.modifiedButton,
+.modifiedButton:hover {
   background-color: var(--purple);
   color: var(--white);
+  border-radius: 5px;
 }

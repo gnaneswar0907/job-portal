@@ -14,6 +14,7 @@ module.exports = {
           "^views/(.+)": "./src/views/\\1",
           "^state/(.+)": "./src/state/\\1",
           "^api/(.+)": "./src/api/\\1",
+          "^hooks/(.+)": "./src/hooks/\\1",
         },
       },
     ],
