@@ -1,0 +1,25 @@
+.filterContainer {
+  display: grid;
+  grid-template-columns: 40% 30% 30%;
+  border: 1px solid var(--lightGray);
+  border-radius: 10px;
+}
+
+.filterContainer [class~="ms-TextField-prefix"] {
+  background: unset;
+}
+
+.filterOption {
+  border-right: 1px solid var(--lightGray);
+}
+
+.filterOption,
+.searchButtonContainer {
+  padding: 20px;
+}
+
+.searchButtonContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

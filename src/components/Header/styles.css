@@ -1,0 +1,42 @@
+.headerContainer {
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--purple);
+  border-bottom-left-radius: 50px;
+  position: absolute;
+  width: 100%;
+}
+.headerText {
+  font-weight: 600;
+  font-size: 24px;
+  margin-left: 8%;
+}
+.headerContainer .headerText > a {
+  color: var(--white);
+  text-decoration: none;
+}
+.headerContainer .headerText > a:visited {
+  text-decoration: none;
+}
+
+.headerText,
+.darkModeToggle {
+  margin-top: 2%;
+}
+
+.darkModeToggle {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 8%;
+}
+
+.darkModeToggle .toggle {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.darkModeToggle .toggleIcon {
+  margin-top: 3px;
+  color: var(--white);
+}
