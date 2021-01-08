@@ -1,11 +1,11 @@
 .headerCard {
   border-radius: 10px;
-  background-color: var(--white);
   display: flex;
   align-items: center;
+  width: 50%;
+  margin: 0 25%;
+  z-index: 2;
   position: absolute;
-  width: 60%;
-  margin: 0 20%;
 }
 
 .headerCard .companyInfo {
@@ -44,6 +44,8 @@
 
 .companyWebsiteButton {
   width: 30%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .companyWebsiteButton button,

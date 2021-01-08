@@ -9,6 +9,7 @@ export const Input = ({
   onPrefixIconClick = NO_OP,
   placeholder,
   onChange = NO_OP,
+  darkMode,
 }) => (
   <TextField
     borderless
@@ -18,6 +19,10 @@ export const Input = ({
         <Icon iconName={prefixIconName} />
       </span>
     )}
+    styles={{
+      field: { backgroundColor: darkMode ? "var(--darkBlue)" : "unset" },
+      prefix: { backgroundColor: darkMode ? "var(--darkBlue)" : "unset" },
+    }}
     placeholder={placeholder}
     onChange={onChange}
   />

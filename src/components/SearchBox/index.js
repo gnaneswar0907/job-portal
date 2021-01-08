@@ -15,31 +15,58 @@ export const SearchBox = ({
   handleSearchChange = NO_OP,
   handleSearchClick = NO_OP,
 }) => {
-  const { searchText, location, fullTime } = useJobContext()
+  const { searchText, location, fullTime, darkMode } = useJobContext()
   return (
-    <div className="filterContainer">
-      <div className="filterOption">
+    <div
+      className="filterContainer"
+      style={{
+        backgroundColor: darkMode ? "var(--lightBlue)" : "var(--white)",
+      }}
+    >
+      <div
+        className="filterOption"
+        style={{ borderColor: darkMode ? "#ccc" : "var(--lightGray)" }}
+      >
         <Input
           value={searchText}
           prefixIconName="Search"
           placeholder="Filter by title, companies, expertise..."
           onChange={handleSearchChange}
+          darkMode={darkMode}
         />
       </div>
-      <div className="filterOption">
+      <div
+        className="filterOption"
+        style={{ borderColor: darkMode ? "#ccc" : "var(--lightGray)" }}
+      >
         <Input
           value={location}
           prefixIconName="MapPin"
           placeholder="Filter by location"
           onChange={handleLocationChange}
+          darkMode={darkMode}
         />
       </div>
       <div className="searchButtonContainer">
-        <Checkbox
-          label="Full Time Only"
-          checked={fullTime}
-          onChange={handleCheckboxToggle}
-        />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Checkbox
+            label=""
+            checked={fullTime}
+            onChange={handleCheckboxToggle}
+            styles={{
+              checkbox: { borderColor: darkMode ? "var(--white)" : "black" },
+            }}
+          ></Checkbox>
+          <span
+            style={{
+              color: darkMode ? "var(--white)" : "unset",
+              fontWeight: 600,
+              marginLeft: "4px",
+            }}
+          >
+            Full Time Only
+          </span>
+        </div>
         <Button text="Search" onClick={handleSearchClick} />
       </div>
     </div>

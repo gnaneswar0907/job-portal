@@ -1,5 +1,5 @@
 .detailFooter {
-  padding: 2% 20%;
+  padding: 2% 25%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,6 @@
 
 .jobTitle {
   font-weight: bold;
-  color: var(--lightBlue);
   padding: 1% 2%;
   width: 70%;
 }

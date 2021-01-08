@@ -9,11 +9,14 @@ import { Button } from "components/Button"
 import "./JobDescription.css"
 
 export const JobDescription = (props) => {
-  const { jobData = {} } = useJobContext()
-
-  console.log(jobData)
+  const { jobData = {}, darkMode } = useJobContext()
   return (
-    <div className="jobDescription">
+    <div
+      className="jobDescription"
+      style={{
+        backgroundColor: darkMode ? "var(--lightBlue)" : "var(--white)",
+      }}
+    >
       <div className="jobInfoSection">
         <div style={{ width: "80%" }}>
           <div className="jobMetaData">
@@ -29,7 +32,14 @@ export const JobDescription = (props) => {
             </span>
             <span className="jobType">{jobData?.type}</span>
           </div>
-          <div className="jobTitle">{jobData?.title}</div>
+          <div
+            className="jobTitle"
+            style={{
+              color: darkMode ? "var(--white)" : "var(--lightBlue)",
+            }}
+          >
+            {jobData?.title}
+          </div>
           <div className="jobLocation">{jobData?.location}</div>
         </div>
         <div style={{ width: "20%" }}>
@@ -39,7 +49,9 @@ export const JobDescription = (props) => {
         </div>
       </div>
       <div
-        className="jobDescriptionContent"
+        className={
+          darkMode ? "jobDescriptionContentDark" : "jobDescriptionContent"
+        }
         dangerouslySetInnerHTML={{ __html: jobData?.description }}
       />
     </div>

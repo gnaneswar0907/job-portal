@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useState, useRef } from "react"
 import { isEmpty, isNil } from "ramda"
 
-import { Header } from "components/Header"
 import { SearchBox } from "components/SearchBox"
 import { JobCards } from "components/JobCards"
 import { Spinner } from "components/Spinner"
@@ -12,7 +11,7 @@ import {
   ON_FULLTIME_TOGGLE,
 } from "state/constants"
 import { jobsReducer } from "state/reducer"
-import { JobContext } from "hooks/context"
+import { JobContext, useJobContext } from "hooks/context"
 import { useLocation } from "hooks/useLocation"
 import { fetchAllJobs } from "state/actions"
 
@@ -26,6 +25,7 @@ export const HomePage = (props) => {
   const { lat = null, long = null, locationLoaded } = useLocation()
 
   const { searchText, location, fullTime, jobsData, dataLoading } = state
+  const { darkMode } = useJobContext()
 
   const getJobSearchParams = (useGeoLocation = false) => {
     const commonParams = {
@@ -99,10 +99,17 @@ export const HomePage = (props) => {
         searchText,
         location,
         fullTime,
+        ...useJobContext(),
       }}
     >
-      <div className="homeContainer" onKeyDown={handleKeyDown} tabIndex={0}>
-        <Header />
+      <div
+        className="homeContainer"
+        style={{
+          backgroundColor: darkMode ? "var(--darkBlue)" : "var(--lightGray)",
+        }}
+        onKeyDown={handleKeyDown}
+        tabIndex={0}
+      >
         <div className="jobSearchFilter">
           <SearchBox
             handleSearchChange={handleSearchChange}

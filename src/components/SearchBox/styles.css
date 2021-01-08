@@ -1,14 +1,8 @@
 .filterContainer {
   display: grid;
   grid-template-columns: 40% 30% 30%;
-  border: 1px solid var(--lightGray);
   border-radius: 10px;
   margin-bottom: 5%;
-  background-color: var(--white);
-}
-
-.filterContainer [class~="ms-TextField-prefix"] {
-  background: unset;
 }
 
 .filterOption {

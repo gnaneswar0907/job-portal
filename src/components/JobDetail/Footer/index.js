@@ -5,10 +5,20 @@ import { Button } from "components/Button"
 import "./Footer.css"
 
 export const Footer = (props) => {
-  const { jobData = {} } = useJobContext()
+  const { jobData = {}, darkMode } = useJobContext()
   return (
-    <div className="detailFooter">
-      <div className="jobTitle">
+    <div
+      className="detailFooter"
+      style={{
+        backgroundColor: darkMode ? "var(--lightBlue)" : "var(--white)",
+      }}
+    >
+      <div
+        className="jobTitle"
+        style={{
+          color: darkMode ? "var(--white)" : "var(--lightBlue)",
+        }}
+      >
         {jobData?.title}
         <span className="jobMetaData" style={{ paddingLeft: "unset" }}>
           {jobData?.company}

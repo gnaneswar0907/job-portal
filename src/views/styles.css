@@ -1,6 +1,5 @@
 .homeContainer {
   position: relative;
-  background-color: var(--lightGray);
   outline: none;
 }
 
@@ -11,7 +10,7 @@
   right: 8%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  background-color: var(--lightGray);
+  z-index: 2;
 }
 
 .jobsContainer {

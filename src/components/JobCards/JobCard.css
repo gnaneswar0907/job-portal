@@ -1,19 +1,22 @@
-.jobCard {
-  background-color: white;
+.jobCardLight,
+.jobCardDark {
   height: 150px;
   width: 250px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   border-radius: 5px;
-  border: 1px solid var(--lightGray);
   position: relative;
   margin-bottom: 5%;
   padding: 15px;
 }
 
-.jobCard:hover {
-  box-shadow: 0px 10px 5px -8px var(--lightGray);
+.jobCardLight:hover {
+  box-shadow: 0px 10px 5px -8px var(--white);
+}
+
+.jobCardDark:hover {
+  box-shadow: 0px 10px 5px -8px var(--lightBlue);
 }
 
 .imgContainer {

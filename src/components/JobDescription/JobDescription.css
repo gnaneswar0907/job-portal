@@ -1,8 +1,7 @@
 .jobDescription {
-  background-color: var(--white);
   margin-top: 10%;
-  margin-left: 20%;
-  margin-right: 20%;
+  margin-left: 25%;
+  margin-right: 25%;
   padding: 3%;
   border-radius: 10px;
 }
@@ -41,27 +40,51 @@
   align-items: center;
 }
 
-.jobDescriptionContent {
+.jobDescriptionContent,
+.jobDescriptionContentDark {
   padding: 2%;
 }
 
 .jobDescriptionContent p,
 .jobDescriptionContent ul,
-.jobDescriptionContent ol {
+.jobDescriptionContent ol,
+.jobDescriptionContentDark p,
+.jobDescriptionContentDark ul,
+.jobDescriptionContentDark ol {
   color: gray;
 }
 
 .jobDescriptionContent ul,
-.jobDescriptionContent ol {
+.jobDescriptionContent ol,
+.jobDescriptionContentDark ul,
+.jobDescriptionContentDark ol {
   list-style: none;
 }
 
 .jobDescriptionContent ul li::before,
-.jobDescriptionContent ol li::before {
+.jobDescriptionContent ol li::before,
+.jobDescriptionContentDark ul li::before,
+.jobDescriptionContentDark ol li::before {
   content: "\2022";
   color: var(--purple);
   font-weight: bold;
   display: inline-block;
   width: 1em;
   margin-left: -1em;
+}
+
+.jobDescriptionContent h2 {
+  color: var(--lightBlue);
+}
+
+.jobDescriptionContentDark h2 {
+  color: var(--white);
+}
+
+.jobDescriptionContent a {
+  color: var(--lightBlue);
+}
+
+.jobDescriptionContentDark a {
+  color: var(--white);
 }

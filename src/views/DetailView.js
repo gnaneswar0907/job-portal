@@ -1,12 +1,11 @@
 import React, { useReducer, useEffect } from "react"
 
-import { Header } from "components/Header"
 import { JobDetail } from "components/JobDetail"
 
 import { fetchJobDetails } from "state/actions"
 import { initialState } from "state/constants"
 import { jobsReducer } from "state/reducer"
-import { JobContext } from "hooks/context"
+import { JobContext, useJobContext } from "hooks/context"
 
 export const DetailView = ({
   match: {
@@ -26,9 +25,9 @@ export const DetailView = ({
       <JobContext.Provider
         value={{
           jobData: selectedJobDetail,
+          ...useJobContext(),
         }}
       >
-        <Header />
         <JobDetail dataLoading={dataLoading} />
       </JobContext.Provider>
     </>

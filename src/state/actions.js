@@ -32,5 +32,3 @@ export const fetchJobDetails = (id) => (dispatch) => {
       dispatch({ type: FETCH_JOB_DETAILS.FAILURE, payload: err })
     })
 }
-
-// /positions.json?page=${params.page}&description=${params.description}&full_time=${params.fullTime}&location=${params.location}
