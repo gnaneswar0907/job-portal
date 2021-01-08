@@ -26,7 +26,9 @@
     "@uifabric/icons": "^7.5.17",
     "axios": "^0.21.1",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-time-ago": "^6.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

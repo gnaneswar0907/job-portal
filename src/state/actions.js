@@ -8,9 +8,7 @@ import { FETCH_JOBS, FETCH_JOB_DETAILS, LOAD_MORE_SUCCESS } from "./constants"
 export const fetchAllJobs = (params) => (dispatch) => {
   dispatch({ type: FETCH_JOBS.REQUEST })
   api
-    .get(
-      `/positions.json?page=${params.page}&description=${params.description}&full_time=${params.fullTime}&location=${params.location}`
-    )
+    .get(`/positions.json`, { params })
     .then((response) => {
       dispatch({
         type: params.loadMore ? LOAD_MORE_SUCCESS : FETCH_JOBS.SUCCESS,
@@ -26,7 +24,7 @@ export const fetchAllJobs = (params) => (dispatch) => {
 export const fetchJobDetails = (id) => (dispatch) => {
   dispatch({ type: FETCH_JOB_DETAILS.REQUEST })
   api
-    .get(`/positions/${id}.json?markdown=true`)
+    .get(`/positions/${id}.json`)
     .then((response) => {
       dispatch({ type: FETCH_JOB_DETAILS.SUCCESS, payload: response.data })
     })
@@ -34,3 +32,5 @@ export const fetchJobDetails = (id) => (dispatch) => {
       dispatch({ type: FETCH_JOB_DETAILS.FAILURE, payload: err })
     })
 }
+
+// /positions.json?page=${params.page}&description=${params.description}&full_time=${params.fullTime}&location=${params.location}

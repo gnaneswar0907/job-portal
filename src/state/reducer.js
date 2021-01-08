@@ -31,7 +31,7 @@ export const jobsReducer = (state = initialState, action) => {
     case ON_LOCATION_CHANGE:
       return { ...state, location: action.payload }
     case ON_FULLTIME_TOGGLE:
-      return { ...state, fullTimeFlag: !state.fullTimeFlag }
+      return { ...state, fullTime: !state.fullTime }
     case LOAD_MORE_SUCCESS:
       return { ...state, jobsData: concat(state.jobsData, action.payload) }
   }

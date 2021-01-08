@@ -1,5 +1,5 @@
 import axios from "axios"
 
 export default axios.create({
-  baseURL: "https://cors-anywhere.herokuapp.com/https://jobs.github.com",
+  baseURL: "http://0.0.0.0:8080/https://jobs.github.com",
 })

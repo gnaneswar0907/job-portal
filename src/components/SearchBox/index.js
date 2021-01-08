@@ -15,7 +15,7 @@ export const SearchBox = ({
   handleSearchChange = NO_OP,
   handleSearchClick = NO_OP,
 }) => {
-  const { searchText, location, fullTimeFlag } = useJobContext()
+  const { searchText, location, fullTime } = useJobContext()
   return (
     <div className="filterContainer">
       <div className="filterOption">
@@ -37,7 +37,7 @@ export const SearchBox = ({
       <div className="searchButtonContainer">
         <Checkbox
           label="Full Time Only"
-          checked={fullTimeFlag}
+          checked={fullTime}
           onChange={handleCheckboxToggle}
         />
         <Button text="Search" onClick={handleSearchClick} />

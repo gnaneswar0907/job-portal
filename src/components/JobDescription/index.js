@@ -1,0 +1,1 @@
+export { JobDescription } from "./JobDescription"

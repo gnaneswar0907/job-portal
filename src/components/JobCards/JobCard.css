@@ -1,0 +1,61 @@
+.jobCard {
+  background-color: white;
+  height: 150px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border-radius: 5px;
+  border: 1px solid var(--lightGray);
+  position: relative;
+  margin-bottom: 5%;
+  padding: 15px;
+}
+
+.jobCard:hover {
+  box-shadow: 0px 10px 5px -8px var(--lightGray);
+}
+
+.imgContainer {
+  position: absolute;
+  left: 10%;
+  top: -15px;
+  background-color: var(--white);
+  height: 40px;
+  width: 40px;
+  border-radius: 30%;
+}
+
+.imgContainer img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  border-radius: 30%;
+}
+
+.jobMetaData {
+  font-size: 0.8rem;
+  color: gray;
+  font-weight: lighter;
+  padding: 2%;
+  display: flex;
+  align-items: center;
+}
+
+.jobMetaDataSeperator {
+  margin-top: 2px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.jobTitle {
+  font-weight: bold;
+  color: var(--lightBlue);
+  padding: 1% 2%;
+}
+.jobLocation {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--purple);
+  padding: 1% 2%;
+}

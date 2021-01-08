@@ -15,7 +15,7 @@ export const initialState = {
   selectedJobDetail: {},
   searchText: "",
   location: "",
-  fullTimeFlag: false,
+  fullTime: false,
 }
 
 /** API ACTION TYPES */

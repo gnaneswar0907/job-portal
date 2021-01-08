@@ -1,0 +1,17 @@
+.applyContainer {
+  background-color: var(--purple);
+  padding: 1% 3%;
+  color: var(--white);
+  margin-top: 3%;
+  margin-left: 20%;
+  margin-right: 20%;
+  border-radius: 10px;
+}
+
+.applyHeader {
+  font-weight: bold;
+}
+
+.applyContainer a {
+  color: var(--white);
+}

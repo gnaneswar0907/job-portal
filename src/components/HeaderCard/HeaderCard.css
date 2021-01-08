@@ -1,0 +1,54 @@
+.headerCard {
+  border-radius: 10px;
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: 60%;
+  margin: 0 20%;
+}
+
+.headerCard .companyInfo {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 3%;
+  padding-right: 3%;
+  width: 100%;
+  align-items: center;
+}
+
+.logoContainer img {
+  height: 125px;
+  width: 125px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.companyInfo .companyName {
+  font-weight: bold;
+  padding: 2%;
+}
+
+.companyInfo .companyWebsite {
+  font-size: 0.8rem;
+  color: gray;
+  font-weight: lighter;
+  padding: 2%;
+  display: flex;
+  align-items: center;
+}
+
+.companyMeta {
+  width: 70%;
+}
+
+.companyWebsiteButton {
+  width: 30%;
+}
+
+.companyWebsiteButton button,
+.companyWebsiteButton button:hover {
+  background-color: var(--lightGray);
+  color: var(--purple);
+  border: none;
+}

@@ -1,0 +1,17 @@
+.jobCardContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 2%;
+  background-color: var(--lightGray);
+}
+
+.emptyJobs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: calc(100vh - 170px);
+  color: #ccc;
+  font-size: 20px;
+}

@@ -1,7 +1,10 @@
-import React, { useEffect, useReducer, useState } from "react"
+import React, { useEffect, useReducer, useState, useRef } from "react"
+import { isEmpty, isNil } from "ramda"
 
 import { Header } from "components/Header"
 import { SearchBox } from "components/SearchBox"
+import { JobCards } from "components/JobCards"
+import { Spinner } from "components/Spinner"
 import {
   initialState,
   ON_SEARCH_CHANGE,
@@ -10,24 +13,31 @@ import {
 } from "state/constants"
 import { jobsReducer } from "state/reducer"
 import { JobContext } from "hooks/context"
-import { fetchAllJobs, loadMoreJobs } from "state/actions"
+import { useLocation } from "hooks/useLocation"
+import { fetchAllJobs } from "state/actions"
 
 import "./styles.css"
 
-const HomePage = (props) => {
+export const HomePage = (props) => {
   const [state, dispatch] = useReducer(jobsReducer, initialState)
   const page = useRef(0)
+  const firstRun = useRef(true)
   const [bottom, setBottom] = useState(false)
+  const { lat = null, long = null, locationLoaded } = useLocation()
 
-  const { searchText, location, fullTimeFlag, jobsData } = state
+  const { searchText, location, fullTime, jobsData, dataLoading } = state
 
-  const getJobSearchParams = () => ({
-    page: page.current,
-    description,
-    location,
-    fullTimeFlag,
-    loadMore: false,
-  })
+  const getJobSearchParams = (useGeoLocation = false) => {
+    const commonParams = {
+      page: page.current,
+      description: searchText,
+      fullTime,
+      loadMore: false,
+    }
+    return !isNil(lat) && !isNil(long) && isEmpty(location) && useGeoLocation
+      ? { ...commonParams, lat, long }
+      : { ...commonParams, location }
+  }
 
   /** SCROLL EVENT HANDLER  */
   const handleScroll = () => {
@@ -45,12 +55,16 @@ const HomePage = (props) => {
 
   //FETCH JOBS ON LOAD
   useEffect(() => {
-    fetchAllJobs(getJobSearchParams())
-  }, [])
+    if (firstRun.current) {
+      firstRun.current = false
+      return
+    }
+    fetchAllJobs(getJobSearchParams(true))(dispatch)
+  }, [locationLoaded])
 
   useEffect(() => {
-    if (jobs.length !== 0 && bottom) {
-      fetchAllJobs({ ...getJobSearchParams(), loadMore: true })
+    if (jobsData.length !== 0 && bottom) {
+      fetchAllJobs({ ...getJobSearchParams(), loadMore: true })(dispatch)
       setBottom(false)
     }
   }, [bottom])
@@ -69,40 +83,43 @@ const HomePage = (props) => {
 
   const handleCheckboxToggle = () => dispatch({ type: ON_FULLTIME_TOGGLE })
 
-  const handleSearchClick = () => {
-    const searchParams = {
-      description: searchText,
-      fullTime: fullTimeFlag,
-      location,
-      page: 1,
-    }
-    fetchAllJobs(searchParams)(dispatch)
-  }
+  const handleSearchClick = () => fetchAllJobs(getJobSearchParams())(dispatch)
 
-  console.log(jobsData)
+  const handleKeyDown = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    if (e.keyCode === 13) {
+      handleSearchClick()
+    }
+  }
 
   return (
     <JobContext.Provider
       value={{
         searchText,
         location,
-        fullTimeFlag,
+        fullTime,
       }}
     >
-      <div className="homeContainer">
+      <div className="homeContainer" onKeyDown={handleKeyDown} tabIndex={0}>
         <Header />
-        <div className="jobsContainer">
+        <div className="jobSearchFilter">
           <SearchBox
             handleSearchChange={handleSearchChange}
             handleLocationChange={handleLocationChange}
             handleCheckboxToggle={handleCheckboxToggle}
             handleSearchClick={handleSearchClick}
           />
-          <div></div>
         </div>
+        <div className="jobsContainer">
+          {!dataLoading && <JobCards jobs={jobsData} />}
+        </div>
+        <If condition={dataLoading}>
+          <div style={{ height: "calc(100vh - 170px)" }}>
+            <Spinner />
+          </div>
+        </If>
       </div>
     </JobContext.Provider>
   )
 }
-
-export default HomePage

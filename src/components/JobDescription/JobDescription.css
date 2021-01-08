@@ -1,0 +1,67 @@
+.jobDescription {
+  background-color: var(--white);
+  margin-top: 10%;
+  margin-left: 20%;
+  margin-right: 20%;
+  padding: 3%;
+  border-radius: 10px;
+}
+
+.jobDescription .jobMetaData {
+  font-size: 0.8rem;
+  color: gray;
+  font-weight: lighter;
+  padding: 0.5% 2%;
+  display: flex;
+  align-items: center;
+}
+
+.jobDescription .jobMetaDataSeperator {
+  margin-top: 2px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.jobDescription .jobTitle {
+  font-weight: bold;
+  color: var(--lightBlue);
+  padding: 0.5% 2%;
+  font-size: x-large;
+}
+.jobDescription .jobLocation {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: var(--purple);
+  padding: 0.5% 2%;
+}
+
+.jobDescription .jobInfoSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.jobDescriptionContent {
+  padding: 2%;
+}
+
+.jobDescriptionContent p,
+.jobDescriptionContent ul,
+.jobDescriptionContent ol {
+  color: gray;
+}
+
+.jobDescriptionContent ul,
+.jobDescriptionContent ol {
+  list-style: none;
+}
+
+.jobDescriptionContent ul li::before,
+.jobDescriptionContent ol li::before {
+  content: "\2022";
+  color: var(--purple);
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
