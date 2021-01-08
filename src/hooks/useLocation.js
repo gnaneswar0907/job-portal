@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 
 export const useLocation = () => {
   const [location, setLocation] = useState({
-    locationLoaded: null,
+    locationLoaded: false,
     lat: null,
     long: null,
     error: null,

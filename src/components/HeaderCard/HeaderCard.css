@@ -54,3 +54,61 @@
   color: var(--purple);
   border: none;
 }
+
+@media only screen and (max-width: 640px) {
+  .mobileHeaderCard {
+    height: 145px;
+    left: 8%;
+    right: 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-radius: 5px;
+    position: absolute;
+    z-index: 2;
+  }
+  .mobileHeaderCardImg {
+    position: absolute;
+    left: 43%;
+    top: -15px;
+    background-color: var(--white);
+    height: 40px;
+    width: 40px;
+    border-radius: 30%;
+  }
+  .mobileHeaderCardImg img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 30%;
+  }
+
+  .mobileJobTitle {
+    font-weight: bold;
+    padding: 1% 2%;
+    text-align: center;
+  }
+  .mobileJobMeta {
+    font-size: 0.8rem;
+    color: gray;
+    font-weight: lighter;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .companyWebsiteButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4%;
+  }
+
+  .companyWebsiteButton button,
+  .companyWebsiteButton button:hover {
+    background-color: var(--lightGray);
+    color: var(--purple);
+    border: none;
+  }
+}

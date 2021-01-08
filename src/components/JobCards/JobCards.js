@@ -1,10 +1,11 @@
-import { isEmpty } from "ramda"
 import React from "react"
+import { isEmpty } from "ramda"
 
+import { Button } from "components/Button"
 import { JobCard } from "./JobCard"
 import "./JobCards.css"
 
-export const JobCards = ({ jobs = [] }) => {
+export const JobCards = ({ jobs = [], handleMoreResultsLoad = () => {} }) => {
   return (
     <Choose>
       <When condition={!isEmpty(jobs)}>
@@ -12,6 +13,9 @@ export const JobCards = ({ jobs = [] }) => {
           {jobs?.map((job, idx) => (
             <JobCard jobData={job} key={`_${job.id}_${idx}_`} />
           ))}
+          <div className="loadMoreButton">
+            <Button text="Load More" onClick={handleMoreResultsLoad} />
+          </div>
         </div>
       </When>
       <Otherwise>

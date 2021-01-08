@@ -82,9 +82,36 @@
 }
 
 .jobDescriptionContent a {
-  color: var(--lightBlue);
+  color: var(--purple);
 }
 
 .jobDescriptionContentDark a {
   color: var(--white);
+}
+
+.jobInfoCompanyLink {
+  width: 20%;
+}
+
+@media only screen and (max-width: 640px) {
+  .jobDescription {
+    margin-top: 40%;
+    margin-left: 8%;
+    margin-right: 8%;
+  }
+  .jobDescription .jobInfoSection {
+    display: grid;
+    grid-template-columns: 100%;
+    align-items: center;
+    grid-row-gap: 20px;
+  }
+  .jobDescription .jobTitle {
+    width: unset;
+  }
+  .jobInfoCompanyLink {
+    width: 100%;
+  }
+  .jobInfoCompanyLink button {
+    width: 100%;
+  }
 }

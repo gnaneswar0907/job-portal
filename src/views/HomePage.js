@@ -19,17 +19,16 @@ import "./styles.css"
 
 export const HomePage = (props) => {
   const [state, dispatch] = useReducer(jobsReducer, initialState)
-  const page = useRef(0)
   const firstRun = useRef(true)
   const [bottom, setBottom] = useState(false)
-  const { lat = null, long = null, locationLoaded } = useLocation()
 
-  const { searchText, location, fullTime, jobsData, dataLoading } = state
+  const { lat = null, long = null, locationLoaded } = useLocation()
+  const { searchText, location, fullTime, jobsData, dataLoading, page } = state
   const { darkMode } = useJobContext()
 
   const getJobSearchParams = (useGeoLocation = false) => {
     const commonParams = {
-      page: page.current,
+      page,
       description: searchText,
       fullTime,
       loadMore: false,
@@ -39,7 +38,7 @@ export const HomePage = (props) => {
       : { ...commonParams, location }
   }
 
-  /** SCROLL EVENT HANDLER  */
+  //FUNCTION TO HANDLE SCROLLING EVENT ONCE PAGE HITS BOTTOM
   const handleScroll = () => {
     const scrollTop =
       (document.documentElement && document.documentElement.scrollTop) ||
@@ -48,8 +47,8 @@ export const HomePage = (props) => {
       (document.documentElement && document.documentElement.scrollHeight) ||
       document.body.scrollHeight
     if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
-      page.current = page.current + 1
       setBottom(true)
+      // pageNumber.current = pageNumber.current + 1;
     }
   }
 
@@ -63,16 +62,27 @@ export const HomePage = (props) => {
   }, [locationLoaded])
 
   useEffect(() => {
-    if (jobsData.length !== 0 && bottom) {
-      fetchAllJobs({ ...getJobSearchParams(), loadMore: true })(dispatch)
-      setBottom(false)
+    if (bottom) {
+      fetchAllJobs({ ...getJobSearchParams(), loadMore: true, page: page + 1 })(
+        dispatch
+      )
     }
   }, [bottom])
+
+  useEffect(() => {
+    bottom && setBottom(false)
+  }, [jobsData.length])
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  const handleMoreResultsLoad = () => {
+    // fetchAllJobs({ ...getJobSearchParams(), loadMore: true, page: page + 1 })(
+    //   dispatch
+    // )
+  }
 
   /** STATE CHANGE HANDLERS */
   const handleSearchChange = (_, newValue) =>
@@ -83,9 +93,11 @@ export const HomePage = (props) => {
 
   const handleCheckboxToggle = () => dispatch({ type: ON_FULLTIME_TOGGLE })
 
-  const handleSearchClick = () => fetchAllJobs(getJobSearchParams())(dispatch)
+  const handleSearchClick = () => {
+    fetchAllJobs(getJobSearchParams())(dispatch)
+  }
 
-  const handleKeyDown = (e) => {
+  const handleKeyUp = (e) => {
     e.preventDefault()
     e.stopPropagation()
     if (e.keyCode === 13) {
@@ -107,7 +119,7 @@ export const HomePage = (props) => {
         style={{
           backgroundColor: darkMode ? "var(--darkBlue)" : "var(--lightGray)",
         }}
-        onKeyDown={handleKeyDown}
+        onKeyUp={handleKeyUp}
         tabIndex={0}
       >
         <div className="jobSearchFilter">
@@ -119,9 +131,14 @@ export const HomePage = (props) => {
           />
         </div>
         <div className="jobsContainer">
-          {!dataLoading && <JobCards jobs={jobsData} />}
+          {!dataLoading && (
+            <JobCards
+              jobs={jobsData}
+              handleMoreResultsLoad={handleMoreResultsLoad}
+            />
+          )}
         </div>
-        <If condition={dataLoading}>
+        <If condition={dataLoading || !locationLoaded}>
           <div style={{ height: "calc(100vh - 170px)" }}>
             <Spinner />
           </div>

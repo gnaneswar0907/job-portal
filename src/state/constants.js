@@ -16,6 +16,7 @@ export const initialState = {
   searchText: "",
   location: "",
   fullTime: false,
+  page: 0,
 }
 
 /** API ACTION TYPES */

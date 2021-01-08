@@ -15,3 +15,10 @@
 .applyContainer a {
   color: var(--white);
 }
+
+@media only screen and (max-width: 640px) {
+  .applyContainer {
+    margin-left: 8%;
+    margin-right: 8%;
+  }
+}

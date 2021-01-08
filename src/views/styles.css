@@ -18,3 +18,19 @@
   padding-left: 8%;
   padding-right: 8%;
 }
+
+@media only screen and (max-width: 640px) {
+  .jobsContainer {
+    padding-top: 156px;
+    padding-left: 8%;
+    padding-right: 8%;
+  }
+  .jobSearchFilter {
+    position: fixed;
+    top: unset;
+    bottom: 60px;
+  }
+  .homeContainer {
+    position: unset;
+  }
+}

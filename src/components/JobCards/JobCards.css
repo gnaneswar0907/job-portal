@@ -14,3 +14,23 @@
   color: #ccc;
   font-size: 20px;
 }
+
+.loadMoreButton {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5%;
+}
+
+@media only screen and (max-width: 640px) {
+  .jobCardContainer {
+    margin-top: unset;
+    display: grid;
+    grid-template-columns: 100%;
+    grid-row-gap: 20px;
+  }
+  .emptyJobs {
+    font-size: 110%;
+  }
+}

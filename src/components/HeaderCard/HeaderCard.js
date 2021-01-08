@@ -1,6 +1,7 @@
 import React from "react"
 
 import { useJobContext } from "hooks/context"
+import { useWindowSize } from "hooks/useWindowSize"
 import { Button } from "components/Button"
 
 import "./HeaderCard.css"
@@ -11,32 +12,73 @@ export const HeaderCard = (props) => {
     darkMode,
   } = useJobContext()
 
+  const { width } = useWindowSize()
+
   return (
-    <div
-      className="headerCard"
-      style={{
-        backgroundColor: darkMode ? "var(--lightBlue)" : "var(--white)",
-      }}
-    >
-      <div className="logoContainer">
-        <img src={company_logo} alt="company logo" />
-      </div>
-      <div className="companyInfo">
-        <div className="companyMeta">
+    <Choose>
+      <When condition={width < 641}>
+        <div
+          className="mobileHeaderCard"
+          style={{
+            backgroundColor: darkMode ? "var(--lightBlue)" : "var(--white)",
+          }}
+        >
           <div
-            className="companyName"
-            style={{ color: darkMode ? "var(--white)" : "var(--lightBlue)" }}
+            className="mobileHeaderCardImg"
+            style={{
+              backgroundColor: darkMode ? "var(--lightBlue)" : "var(--white)",
+            }}
           >
-            {company}
+            <img src={`${company_logo}`} alt="logo" />
           </div>
-          <div className="companyWebsite">{company_url}</div>
+          <div style={{ paddingTop: width < 641 ? "7%" : "12%" }}>
+            <div
+              className="mobileJobTitle"
+              style={{ color: darkMode ? "var(--white)" : "var(--lightBlue)" }}
+            >
+              {company}
+              <span className="mobileJobMeta" style={{ paddingLeft: "unset" }}>
+                {company_url}
+              </span>
+            </div>
+          </div>
+          <div className="companyWebsiteButton">
+            <a href={company_url} target="_blank">
+              <Button text="Company Site" />
+            </a>
+          </div>
         </div>
-        <div className="companyWebsiteButton">
-          <a href={company_url} target="_blank">
-            <Button text="Company Site" />
-          </a>
+      </When>
+      <Otherwise>
+        <div
+          className="headerCard"
+          style={{
+            backgroundColor: darkMode ? "var(--lightBlue)" : "var(--white)",
+          }}
+        >
+          <div className="logoContainer">
+            <img src={company_logo} alt="company logo" />
+          </div>
+          <div className="companyInfo">
+            <div className="companyMeta">
+              <div
+                className="companyName"
+                style={{
+                  color: darkMode ? "var(--white)" : "var(--lightBlue)",
+                }}
+              >
+                {company}
+              </div>
+              <div className="companyWebsite">{company_url}</div>
+            </div>
+            <div className="companyWebsiteButton">
+              <a href={company_url} target="_blank">
+                <Button text="Company Site" />
+              </a>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
+      </Otherwise>
+    </Choose>
   )
 }

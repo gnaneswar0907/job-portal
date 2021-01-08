@@ -27,12 +27,17 @@ export const jobsReducer = (state = initialState, action) => {
     case FETCH_JOB_DETAILS.FAILURE:
       return { ...state, dataLoading: false }
     case ON_SEARCH_CHANGE:
-      return { ...state, searchText: action.payload }
+      return { ...state, searchText: action.payload, page: 0 }
     case ON_LOCATION_CHANGE:
-      return { ...state, location: action.payload }
+      return { ...state, location: action.payload, page: 0 }
     case ON_FULLTIME_TOGGLE:
-      return { ...state, fullTime: !state.fullTime }
+      return { ...state, fullTime: !state.fullTime, page: 0 }
     case LOAD_MORE_SUCCESS:
-      return { ...state, jobsData: concat(state.jobsData, action.payload) }
+      return {
+        ...state,
+        jobsData: concat(state.jobsData, action.payload),
+        page: state.page + 1,
+        dataLoading: false,
+      }
   }
 }

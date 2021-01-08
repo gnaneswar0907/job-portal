@@ -41,3 +41,13 @@
   color: var(--white);
   cursor: pointer;
 }
+
+@media only screen and (max-width: 640px) {
+  .headerContainer {
+    border-bottom-left-radius: unset;
+  }
+  .headerText,
+  .darkModeToggle {
+    margin-top: 9%;
+  }
+}

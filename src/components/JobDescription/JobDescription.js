@@ -4,12 +4,14 @@ import { Icon } from "@fluentui/react"
 import { isNil } from "ramda"
 
 import { useJobContext } from "hooks/context"
+import { useWindowSize } from "hooks/useWindowSize"
 import { Button } from "components/Button"
 
 import "./JobDescription.css"
 
 export const JobDescription = (props) => {
   const { jobData = {}, darkMode } = useJobContext()
+  const { width } = useWindowSize()
   return (
     <div
       className="jobDescription"
@@ -18,7 +20,7 @@ export const JobDescription = (props) => {
       }}
     >
       <div className="jobInfoSection">
-        <div style={{ width: "80%" }}>
+        <div style={{ width: width < 641 ? "100%" : "80%" }}>
           <div className="jobMetaData">
             {!isNil(jobData?.created_at) && (
               <ReactTimeAgo
@@ -42,7 +44,7 @@ export const JobDescription = (props) => {
           </div>
           <div className="jobLocation">{jobData?.location}</div>
         </div>
-        <div style={{ width: "20%" }}>
+        <div className="jobInfoCompanyLink">
           <a href={jobData?.company_url} target="_blank">
             <Button text="Apply Now" />
           </a>
