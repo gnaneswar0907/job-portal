@@ -5,7 +5,7 @@ import { Button } from "components/Button"
 import { JobCard } from "./JobCard"
 import "./JobCards.css"
 
-export const JobCards = ({ jobs = [], handleMoreResultsLoad = () => {} }) => {
+export const JobCards = ({ jobs = [] }) => {
   return (
     <Choose>
       <When condition={!isEmpty(jobs)}>
@@ -14,7 +14,7 @@ export const JobCards = ({ jobs = [], handleMoreResultsLoad = () => {} }) => {
             <JobCard jobData={job} key={`_${job.id}_${idx}_`} />
           ))}
           <div className="loadMoreButton">
-            <Button text="Load More" onClick={handleMoreResultsLoad} />
+            <Button text="Load More" />
           </div>
         </div>
       </When>

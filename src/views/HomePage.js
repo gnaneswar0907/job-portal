@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState, useRef } from "react"
+import React, { useEffect, useReducer, useRef, useState } from "react"
 import { isEmpty, isNil } from "ramda"
 
 import { SearchBox } from "components/SearchBox"
@@ -13,14 +13,16 @@ import {
 import { jobsReducer } from "state/reducer"
 import { JobContext, useJobContext } from "hooks/context"
 import { useLocation } from "hooks/useLocation"
+import { usePrevious } from "hooks/usePrevious"
 import { fetchAllJobs } from "state/actions"
 
 import "./styles.css"
 
 export const HomePage = (props) => {
   const [state, dispatch] = useReducer(jobsReducer, initialState)
-  const firstRun = useRef(true)
   const [bottom, setBottom] = useState(false)
+  const previousBottom = usePrevious(bottom)
+  const pageYOffset = useRef(0)
 
   const { lat = null, long = null, locationLoaded } = useLocation()
   const { searchText, location, fullTime, jobsData, dataLoading, page } = state
@@ -47,25 +49,24 @@ export const HomePage = (props) => {
       (document.documentElement && document.documentElement.scrollHeight) ||
       document.body.scrollHeight
     if (scrollTop + window.innerHeight + 50 >= scrollHeight) {
+      if (scrollTop > 0) pageYOffset.current = scrollTop
       setBottom(true)
-      // pageNumber.current = pageNumber.current + 1;
     }
   }
 
   //FETCH JOBS ON LOAD
   useEffect(() => {
-    if (firstRun.current) {
-      firstRun.current = false
-      return
-    }
-    fetchAllJobs(getJobSearchParams(true))(dispatch)
+    locationLoaded && fetchAllJobs(getJobSearchParams(true))(dispatch)
   }, [locationLoaded])
 
   useEffect(() => {
-    if (bottom) {
+    if (jobsData.length > 0 && bottom) {
       fetchAllJobs({ ...getJobSearchParams(), loadMore: true, page: page + 1 })(
         dispatch
       )
+    }
+    if (previousBottom & !bottom) {
+      window.scrollTo(0, pageYOffset.current)
     }
   }, [bottom])
 
@@ -78,12 +79,6 @@ export const HomePage = (props) => {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const handleMoreResultsLoad = () => {
-    // fetchAllJobs({ ...getJobSearchParams(), loadMore: true, page: page + 1 })(
-    //   dispatch
-    // )
-  }
-
   /** STATE CHANGE HANDLERS */
   const handleSearchChange = (_, newValue) =>
     dispatch({ type: ON_SEARCH_CHANGE, payload: newValue })
@@ -93,9 +88,7 @@ export const HomePage = (props) => {
 
   const handleCheckboxToggle = () => dispatch({ type: ON_FULLTIME_TOGGLE })
 
-  const handleSearchClick = () => {
-    fetchAllJobs(getJobSearchParams())(dispatch)
-  }
+  const handleSearchClick = () => fetchAllJobs(getJobSearchParams())(dispatch)
 
   const handleKeyUp = (e) => {
     e.preventDefault()
@@ -131,12 +124,7 @@ export const HomePage = (props) => {
           />
         </div>
         <div className="jobsContainer">
-          {!dataLoading && (
-            <JobCards
-              jobs={jobsData}
-              handleMoreResultsLoad={handleMoreResultsLoad}
-            />
-          )}
+          {!dataLoading && <JobCards jobs={jobsData} />}
         </div>
         <If condition={dataLoading || !locationLoaded}>
           <div style={{ height: "calc(100vh - 170px)" }}>
