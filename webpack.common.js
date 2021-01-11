@@ -1,6 +1,8 @@
 /** third party packages */
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
+// const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+//   .BundleAnalyzerPlugin
 
 /** local imports */
 const loaders = require("./loaders")
@@ -21,5 +23,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "src/index.html",
     }),
+    // new BundleAnalyzerPlugin({
+    //   generateStatsFile: true,
+    // }),
   ],
 }
